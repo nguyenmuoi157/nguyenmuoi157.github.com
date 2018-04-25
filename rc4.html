@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script>
+        var banro;
+
+        var K = "";
+       // var K = [2,1,3];
+        function tinhtoan()
+        {
+            var Thongbao ="";
+            var S =[];
+            var T = [];
+            if(K==null ||K =="")
+            {
+                alert('nhập vào vector K');
+                return;
+            }
+            for (let i = 0; i <= 7; i++) {
+            S.push(i);
+            T[i]=Number(K[(i%K.length)]);
+            }
+            Thongbao+="Khởi tạo S và T <br> S="+S+"<br> T ="+T+"<br>";
+        var j=0; 
+        for (let i = 0; i < S.length; i++) {
+            Thongbao+="<b>Bước "+i+"</b><br>i= "+i+"<br>j= "+j+"<br> j =("+j+"+ S["+i+"] + T["+i+"])mod 8 = ("+j+"+"+S[i]+"+"+T[i]+")mod 8 = ";
+            j=(j+S[i]+T[i])%8;
+            Thongbao+=j+"<br>";
+            let tg =S[i];
+            S[i]=S[j];
+            S[j] = tg;
+            Thongbao+="swat( S["+i+"],S["+j+"] )=>";
+            Thongbao+="S ="+S+"<br>";
+            }
+            
+            Thongbao+="<b>Giai Đoạn Sinh Số</b> <br>";
+
+            
+         
+         var k =[];
+         var k1=[];
+         banro = Number(banro);
+         if(typeof banro!='number')
+         {
+             alert('Số bit của bản rõ phải là số nguyên');
+            return;
+         }
+
+          if(banro==null||banro==0)
+          {
+              alert('nhập vào số bit của bản rõ');
+              return;
+          } 
+                var i = 0;
+                var j=0;
+                var a=0;
+        while (k.length<Math.ceil(banro/3)) {
+            Thongbao+="<b>Bước "+a+"</b><br> i =("+i;
+            i = (i+1)%8;
+            Thongbao+="+1)mod8 ="+i+"<br> j =("+j+"+"+S[i]+")mod 8 = ";
+            j = (j+ S[i])%8;
+            Thongbao+=j+"<br>";
+             let tg=S[i];
+             Thongbao+="đổi chỗ S["+i+"] và S["+j+"]=> S=";
+            S[i] =S[j];
+            S[j] = tg;
+            Thongbao+=S+"<br>";
+            let t = (S[i]+S[j])%8;
+            Thongbao+="t = (S["+i+"]+S["+j+"])mod 8 =("+S[i]+"+"+S[j]+")mod 8 ="+t+"<br> S[t]= S["+t+"] = "+S[t];
+            k.push(S[t]);
+           // Thongbao+="S ="+S+"<br>";
+            Thongbao+="k ="+k[a]+" ="+k[a].toString(2)+"<br>";
+            k1.push(k[a].toString(2));
+            a++;
+        }
+        Thongbao+="<b>k = "+k1+"</b>";
+       $("#ketqua").html(Thongbao);
+    }
+$("document").ready(()=>{
+$("#btnTinh").click(()=>{
+    K= $("#vectorK").val();
+    banro=$("#banro").val();
+    tinhtoan();
+});
+
+});
+
+    </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <input type="text" placeholder="Nhập vào số bit của bản rõ" id="banro">
+        <!-- <input type="text" name="N" id="N" placeholder="Nhập N"> -->
+        <input type="text" id="vectorK" placeholder="nhập vector k">
+
+        <button id="btnTinh">Tìm Bản Mã</button>
+    </div>
+    <div id="ketqua"></div>
+</body>
+</html>

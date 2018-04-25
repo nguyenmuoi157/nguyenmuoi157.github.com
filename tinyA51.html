@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="KhoaK" placeholder="Nhập Khoá K">
+    <input type="text" id="banro" placeholder="Nhập bản rõ">
+    <button id="btnTinhToan">Tính</button>
+</body>
+<script>
+
+        var K = "";
+        var BanRo = "";
+        var X =[];
+        var Y =[];
+        var Z = [];
+        var S = [];
+$("document").ready(()=>{
+    $("#btnTinhToan").click(()=>{
+        X=[];
+        Y=[];
+        Z=[];
+        K = $("#KhoaK").val();
+        BanRo = $("#banro").val();
+        
+        for (let i = 0; i < K.length; i++) {
+            if(i<6)
+                X.push(Number(K[i]));
+                else if(i<14)
+                Y.push(Number(K[i]));
+                else
+                    Z.push(Number(K[i]));
+                }
+                console.log("giá trị ban đầu của X,Y,Z là");
+        console.log("X = "+X);
+        console.log("Y = "+Y);
+        console.log("Z = "+Z);
+        for (let i = 0; i < BanRo.length; i++) {
+            var daso = maj(X[1],Y[3],Z[3]);
+            console.log("bước "+i);
+            console.log("daso ="+daso);
+            if(X[1]==daso)
+            {
+                QuayX();
+                console.log("ddm chạy không");
+            }
+                
+            
+                if(Y[3]==daso)
+                {
+                QuayY();
+                 }
+                if(Z[3]==daso)
+                {
+                QuayZ();
+                    }
+        console.log("X = "+X);
+        console.log("Y = "+Y);
+        console.log("Z = "+Z);
+                var sk = X[5]^Y[6]^Z[7];
+                S.push(sk);
+                console.log("S = "+S);
+            }
+            
+        
+    });
+});
+
+function maj(x1,y3,z3)
+{
+    var x = x1+y3+z3;
+
+    if(x<2)
+        return 0;
+    else 
+        return 1;
+}
+
+function QuayX() {
+    var m =X[2]^X[4]^X[5];
+    for (let i = X.length-1; i < 0; i--) {
+        X[i] = X[i-1];
+        
+    }
+    X[0] = m;
+}
+function QuayY() {
+    var m = Number(Y[6])^Number(Y[7]);
+    for (let i = Y.length-1; i < 0; i--) {
+        Y[i] = Y[i-1];
+        
+    }
+    Y[0]=m;
+}
+function QuayZ() {
+   var m= Number(Z[2])^Number(Z[7])^Number(Z[8])
+    for (let i = Z.length-1; i < 0; i--) {
+        Z[i] = Z[i-1];
+        
+    }
+    Z[0]=m;
+}
+</script>
+</html>

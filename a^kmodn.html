@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<body>
+    <input type="text" id="K" placeholder="Nhập k">
+    <input type="text" id="A" placeholder="Nhập a">
+    <input type="text" id="N" placeholder="Nhập n">
+    <button id="btnTinh">Tính a^k mod n</button>
+    <table item-width="100%" border="1px"></table>
+    <div id="ketqua"></div>
+</body>
+<script>
+    $("document").ready(()=>{
+        $("#btnTinh").click(()=>{
+        var k = $("#K").val();
+        var a = $("#A").val();
+        var n = $("#N").val();
+           
+        k = Number(k);
+        a = Number(a);
+        n = Number(n);
+        var b = [];
+        var c = 0;
+        var f = 1;
+        var mangi =[];
+        b = k.toString(2);
+        var mangc = [];
+        var mangf =[];
+        for (let i = 0; i <b.length; i++) {
+           c = 2*c;
+           
+           f=(f*f)%n;
+           if(Number(b[i])==1)
+           {
+               c = c+1;
+               f = (f*a)%n;
+           }
+
+           mangi.push(i);
+           mangc.push(c);
+           mangf.push(f);
+        }
+        console.log(mangc);
+var thongbao="<table width='100%' border='1px'><tr>";
+thongbao+="<td>i</td>";
+for (let i = mangi.length-1; i >=0; i--) {
+    
+    thongbao+="<td>"+mangi[i]+"</td>";
+}
+thongbao+="</tr>";
+thongbao+="<td>b</td>";
+for (let i = 0; i <b.length; i++) {
+    thongbao+="<td>"+b[i]+"</td>";
+}
+thongbao+="</tr>";
+thongbao+="<td>c</td>";
+for (let i = 0; i <mangc.length; i++) {
+    
+    thongbao+="<td>"+mangc[i]+"</td>";
+}
+thongbao+="</tr>";
+thongbao+="<td>f</td>";
+for (let i = 0; i <mangf.length; i++) {
+    
+    thongbao+="<td>"+mangf[i]+"</td>";
+}
+thongbao+="</tr></table>";
+$("#ketqua").html(thongbao);
+        });
+        });
+</script>
+</html>
